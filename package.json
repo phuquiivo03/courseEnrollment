@@ -1,0 +1,47 @@
+{
+  "name": "clinics-backend-pg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest -e .env.test run ",
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
+    "db:init": "bun src/scripts/init-db.ts",
+    "db:create": "bun src/scripts/create-tables.ts",
+    "db:push": "npx prisma db push",
+    "db:generate": "npx prisma generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/supertest": "^6.0.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.16.2",
+    "supertest": "^7.1.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.5",
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.0"
+  }
+}

@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: Enrollments
+  version: 1.0.0
+paths:
+  /api/enrollments:
+    post:
+      summary: Enroll a student to a course
+      tags: [Enrollments]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [studentEmail, courseId]
+              properties:
+                studentEmail:
+                  type: string
+                  format: email
+                courseId:
+                  type: string
+      responses:
+        "201": { description: Created }
+        "400": { description: Validation error }
+        "401": { description: Unauthorized }
+        "409": { description: Conflict }
+    get:
+      summary: List enrollments
+      tags: [Enrollments]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+        - in: query
+          name: studentEmail
+          schema: { type: string, format: email }
+        - in: query
+          name: courseId
+          schema: { type: string }
+      responses:
+        "200": { description: Success }
+
+  /api/enrollments/students/{email}/enrollments:
+    get:
+      summary: List enrollments by student email
+      tags: [Enrollments]
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        "200": { description: Success }
+        "400": { description: Validation error }

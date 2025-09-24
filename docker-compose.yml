@@ -1,0 +1,59 @@
+version: "3.9"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+    environment:
+      - DEFAULT_HOST=clinics.local
+    restart: unless-stopped
+    networks:
+      - sonic-assignment-network
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    restart: unless-stopped
+    networks:
+      - sonic-assignment-network
+
+  # app
+  app:
+    image: phuquivo/sonic-assignment:latest
+    container_name: sonic-assignment
+    environment:
+      - DATABASE_URL=postgresql://neondb_owner:npg_KERUAZfduF48@ep-winter-field-a1xywx9o-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+      - AUTH_SECRET=npg_KE-UAjfduFgz
+      - AUTH_EXPIRES_IN=24h
+      - PORT=3000
+      - VIRTUAL_HOST=devq-be0x7.site
+      - LETSENCRYPT_HOST=devq-be0x7.site
+      - LETSENCRYPT_EMAIL=phuquivo03.cb@gmail.com
+    restart: unless-stopped
+    expose:
+      - 3000
+    networks:
+      - sonic-assignment-network
+
+volumes:
+  nginx-certs:
+  nginx-vhost:
+  nginx-html:
+
+networks:
+  sonic-assignment-network:
+    driver: bridge
