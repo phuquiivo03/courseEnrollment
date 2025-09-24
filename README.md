@@ -32,13 +32,6 @@ PORT=3000
 
 ```
 
-If you don’t have Postgres locally, you can run one via Docker quickly:
-
-```bash
-docker run --name clinics-postgres -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=clinics -p 5432:5432 -d postgres:15-alpine
-```
-
 ### 3) Generate Prisma Client and push schema
 
 ```bash
@@ -67,7 +60,7 @@ Server will listen on: `http://localhost:3000`
 ### 5) API Documentation
 
 - Swagger UI: `http://localhost:3000/api/docs`
-- **Public API**: `https://devq-be0x7.site`
+- **Public API**: `https://devq-be0x7.site/api/docs`
 
 #### cURL Examples
 
