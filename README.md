@@ -2,7 +2,16 @@
 
 Production-ready REST API for Courses and Enrollments with JWT auth, Prisma, Zod validation, Swagger docs, and tests (unit + integration).
 
-### Prerequisites
+
+**🌐 Public endpoint:** https://devq-be0x7.site/
+
+**💻 Test App:** https://enroll-quest-forge.vercel.app/
+
+```Test with: username: admin - password: admin```
+
+
+
+### Local Run Prerequisites
 
 - Node.js >= 18
 - PostgreSQL (local or Docker) OR a cloud Postgres connection string
@@ -44,15 +53,13 @@ npx prisma db push
 - Using Bun scripts (recommended in this repo):
 
 ```bash
-bun src/index.ts
-# or
-bun --watch src/index.ts
+bun run dev
 ```
 
 - Using Node/tsx (if you don’t use Bun):
 
 ```bash
-npx tsx src/index.ts
+npm run dev
 ```
 
 Server will listen on: `http://localhost:3000`
@@ -136,3 +143,7 @@ Integration tests spin up the app in-memory and use an in-memory SQLite database
 - Zod validation middleware
 - Centralized error messages and error middleware
 - Swagger/OpenAPI docs at `/api/docs`
+- Deployment: 
+  - AWS
+  - Docker - Docker compose
+  - Nginx
