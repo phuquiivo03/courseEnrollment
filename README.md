@@ -19,10 +19,17 @@ npm install
 Create a `.env` file in the project root:
 
 ```bash
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/clinics?schema=public"
-AUTH_SECRET="your-strong-jwt-secret"
+# Database
+DATABASE_URL="postgresql://neondb_owner:npg_KERUAZfduF48@ep-winter-field-a1xywx9o-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+# JWT Configuration
+AUTH_SECRET="npg_KE-UAjfduFgz"
 AUTH_EXPIRES_IN="24h"
+AUTH_REFRESH_EXPIRES_IN="30d"
+
+# Server
 PORT=3000
+
 ```
 
 If you don’t have Postgres locally, you can run one via Docker quickly:
